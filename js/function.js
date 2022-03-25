@@ -18,8 +18,8 @@ $(document).ready(function() {
               $(".rigthContent").append('<div class="parent"><button class="children1" data-path= "'+response.rootpath +'" data-text='+  response.data.files[$i].name +'><img src="./assets/images/'+response.data.files[$i].type +'.png" alt="">' +response.data.files[$i].name+ '</button><div class="sub-panel-2"></div></div>');
             }
             for($i=0; $i< ((response.data.folders).length); $i++){
-              $(".sub-panel").append('<div class="parent"><button class="children" data-path= "'+response.rootpath +'"><img src="./assets/images/'+response.data.folders[$i].type +'.png" alt="">' +response.data.folders[$i].name+ '</button><div class="sub-panel-2"></div></div>');
-              $(".rigthContent").append('<div class="parent"><button class="children1" data-path= "'+response.rootpath +'" data-text='+  response.data.folders[$i].name +'><img src="./assets/images/'+response.data.folders[$i].type +'.png" alt="">' +response.data.folders[$i].name+ '</button><div class="sub-panel-2"></div></div>');
+              $(".sub-panel").append('<div class="parent"><button class="children folder" data-path= "'+response.rootpath +'"><img src="./assets/images/'+response.data.folders[$i].type +'.png" alt="">' +response.data.folders[$i].name+ '</button><div class="sub-panel-2"></div></div>');
+              $(".rigthContent").append('<div class="parent"><button class="children1 folder" data-path= "'+response.rootpath +'" data-text='+  response.data.folders[$i].name +'><img src="./assets/images/'+response.data.folders[$i].type +'.png" alt="">' +response.data.folders[$i].name+ '</button><div class="sub-panel-2"></div></div>');
             }
         } else {
           bootbox.alert("Something went wrong!");
@@ -28,7 +28,7 @@ $(document).ready(function() {
     });
   }
 
-  $(".operations.create").click(function(){
+  $(document).on('click', '.operations.create', function () {
       bootbox.prompt({
         title: "Enter a name to create a folder", 
         centerVertical: true,
@@ -58,7 +58,35 @@ $(document).ready(function() {
     });
   });
 
+  $(document).on('dblclick', '.folder', function () {
+    var FolderPath = $(this).attr("data-path");
+    var FolderName = $(this).attr("data-text");
 
+    var action = "EnterFolder";
+    $.ajax({
+      url: 'php/main.php',
+      method: "POST",
+      data: {action:action, FolderPath:FolderPath, FolderName:FolderName},
+      dataType: "json",
+      success: function(response)
+      {
+        if (response.status == "true") {
+          $(".sub-panel").empty();
+          $(".rigthContent").empty();
+          for($i=0; $i< ((response.data.files).length); $i++){
+              $(".sub-panel").append('<div class="parent"><button class="children" data-path= "'+response.rootpath +'"><img src="./assets/images/'+response.data.files[$i].type +'.png" alt="">' +response.data.files[$i].name+ '</button><div class="sub-panel-2"></div></div>');
+              $(".rigthContent").append('<div class="parent"><button class="children1" data-path= "'+response.rootpath +'" data-text='+  response.data.files[$i].name +'><img src="./assets/images/'+response.data.files[$i].type +'.png" alt="">' +response.data.files[$i].name+ '</button><div class="sub-panel-2"></div></div>');
+            }
+            for($i=0; $i< ((response.data.folders).length); $i++){
+              $(".sub-panel").append('<div class="parent"><button class="children folder" data-path= "'+response.rootpath +'"><img src="./assets/images/'+response.data.folders[$i].type +'.png" alt="">' +response.data.folders[$i].name+ '</button><div class="sub-panel-2"></div></div>');
+              $(".rigthContent").append('<div class="parent"><button class="children1 folder" data-path= "'+response.rootpath +'" data-text='+  response.data.folders[$i].name +'><img src="./assets/images/'+response.data.folders[$i].type +'.png" alt="">' +response.data.folders[$i].name+ '</button><div class="sub-panel-2"></div></div>');
+            }
+        } else {
+          bootbox.alert("Something went wrong!");
+        }
+      }
+    }); 
+  });
 });
 
 

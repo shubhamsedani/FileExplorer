@@ -1,9 +1,9 @@
 <?php
-$dir = '../root';
 if(isset($_POST['action']))
 {
 	if($_POST['action'] == "fetch")
 	{
+		$dir = '../root';
 		$response_array = array();
 		$res['files'] = [];
 		$res['folders'] = [];
@@ -25,6 +25,25 @@ if(isset($_POST['action']))
 				array_push($res['folders'], $temp);
 			}
 		}
+	}
+}else{
+	$message = "There is a problem while sending the data.";
+	$status = "False";
+	$res = [];
+}
+
+
+if(isset($_POST['action']))
+{
+	if($_POST['action'] == "EnterFolder")
+	{
+		$dir = $_POST['FolderPath'] . '/' . $_POST['FolderName'];
+		$response_array = array();
+		$res['files'] = [];
+		$res['folders'] = [];
+		$route_data = (array_slice((scandir($dir)),2));
+		$message = "The data is perfeclty sending to the front side";
+		$status = "true";
 	}
 }else{
 	$message = "There is a problem while sending the data.";
