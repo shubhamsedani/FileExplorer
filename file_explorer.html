@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> File Explorer</title>
+<link rel="stylesheet" href="./css/style.css"/>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+
+</head>
+<body>
+</head>
+<body>
+<h1 class="tagline">File Explorer</h1>
+<div class="center-accordion">
+	<div class="left">
+		<h2> This is tree structure</h2>
+
+		 <div class="sub-panel">
+		</div> 
+	</div>
+
+	<div class="right">
+		<div class="mainOprations">
+			<div class=" inline"><button class="operations back"> <img src="./assets/images/back.png" alt=""> Back</button></div>
+			<div class=" inline"><button class="operations create"> <img src="./assets/images/folder.png" alt=""> Create</button></div>
+			<div class=" inline"><button class="operations delete"> <img src="./assets/images/delete.png" alt=""> Delete</button></div>
+			<div class=" inline"><button class="operations add"> <img src="./assets/images/add.png" alt=""> Add file</button></div>
+			<div class=" inline"><button class="operations cut"> <img src="./assets/images/cut.png" alt=""> Cut</button></div>
+			<div class=" inline"><button class="operations copy"> <img src="./assets/images/copy.png" alt=""> Copy</button></div>
+			<div class=" inline"><button class="operations paste opacitylight"> <img src="./assets/images/paste.png" alt=""> Paste</button></div>
+		</div>
+		<div class="rigthContent" data-path= "../root"></div>
+	</div>
+</div>
+
+<ul class='custom-menu'>
+	<li data-action="first">Cut</li>
+	<li data-action="second">Copy</li>
+	<li data-action="third">Delete</li>
+	<li data-action="fourth">Rename</li>
+ </ul>
+
+<ul class='custom-menu1'>
+	<li data-action="first">Create Folder</li>
+	<li data-action="second">Create File</li>
+</ul>
+
+ <script src="./js/function.js"></script>
+ 
+</body>
+</html>
+
+ 
