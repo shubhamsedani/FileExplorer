@@ -4,11 +4,13 @@ if(isset($_POST['action']) && $_POST['FolderName'])
 	$dir = $_POST['DirectoryPath'] . '/' . $_POST['FolderName'];
 	if($_POST['action'] == "create")
 	{
-		$message = "The folder is created";
-		$status = "true";
-
 		if (!file_exists($dir)) {
 			mkdir($dir, 0777, true);
+			$message = "The folder is created";
+			$status = "true";
+		}else{
+			$message = "There is a folder with same name";
+			$status = "false";
 		}
 	}
 }else{

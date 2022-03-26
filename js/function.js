@@ -33,9 +33,11 @@ $(document).ready(function() {
         title: "Enter a name to create a folder", 
         centerVertical: true,
         callback: function(result){ 
-          if(result == ""){
-            // bootbox.alert(result);
-            bootbox.alert("The field was empty, try again!");
+          var newName = new RegExp("^[a-zA-Z0-9]*$").test(result);
+          if(!newName){
+            bootbox.alert("The input is not allowed. Please try with proper name!");
+          }else if( result == ""){
+            bootbox.alert("The field is empty, please try again");
           }else{
             var action = "create";
             var DirectoryPath = $(".rigthContent").attr('data-path');
@@ -49,11 +51,11 @@ $(document).ready(function() {
                 if (response.status == "true") {
                   fetch_data();
                 } else {
-                  bootbox.alert("Something went wrong!");
+                  bootbox.alert(response.message);
                 }
               }
             });
-          } 
+          }
         }
     });
   });
@@ -61,6 +63,8 @@ $(document).ready(function() {
   $(document).on('dblclick', '.folder', function () {
     var FolderPath = $(this).attr("data-path");
     var FolderName = $(this).attr("data-text");
+    // bootbox.alert(FolderPath +"/"+ FolderName);
+    $(".rigthContent").attr("data-path", FolderPath +"/"+ FolderName);
 
     var action = "EnterFolder";
     $.ajax({

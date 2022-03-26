@@ -200,11 +200,18 @@ input#submitbootbox {
   border: none !important;
 }
 
-
 .modal-dialog {
   margin-top: 0;
   margin-bottom: 0;
   display: -webkit-box;
   display: flex;
   height: 100%;
+}
+
+.children1:hover {
+  background: rgb(189, 236, 255);
+}
+
+.children1 {
+  transition: .2s;
 }
