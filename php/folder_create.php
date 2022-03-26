@@ -12,6 +12,27 @@ if(isset($_POST['action']) && $_POST['FolderName'])
 			$message = "There is a folder with same name";
 			$status = "false";
 		}
+
+		$response_array = array();
+		$res['files'] = [];
+		$res['folders'] = [];
+		$route_data = (array_slice((scandir($_POST['DirectoryPath'])),2));// if array slice isn't done here then it will show 2 more folder which is . and ..
+		foreach ($route_data as $element_name) {	
+			$ElementPath = $dir . '/' . $element_name;
+			if (is_file($ElementPath)) {
+				$temp['path'] = $ElementPath;
+				$temp['name'] = $element_name;
+				$temp['type'] = pathinfo($element_name, PATHINFO_EXTENSION);
+				array_push($res['files'], $temp);
+			}else{
+				$temp['path'] = $ElementPath;
+				$temp['name'] = $element_name;
+				$temp['type'] = "folder";
+				array_push($res['folders'], $temp);
+			}
+		}
+		$response_array['data'] = $res;
+		$response_array['rootpath'] = $_POST['DirectoryPath'];
 	}
 }else{
 	$message = "There is a problem while creating the folder";

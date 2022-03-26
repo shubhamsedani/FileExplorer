@@ -48,6 +48,19 @@ if($_POST['action'] == "EnterFolder" && isset($_POST['action'])){
 		$res = [];
 }
 
+if($_POST['action'] == "back" && isset($_POST['action'])) {
+		$dir = $_POST['CurrentPath'];
+		$res = ShowData($dir);
+		$response_array['data'] = $res;
+		$response_array['rootpath'] = $dir;
+		$response_array['message'] = "The data is perfeclty sending to the front side!!!!!";
+		$response_array['status'] = "true";
+	}else if($_POST['action'] == "back"){ //if you remove this condition and direcly paste the else part then it will affect with EnterFolder ajax call
+		$response_array['message'] = "There is a problem while sending the data!";
+		$response_array['status'] = "False";
+		$res = [];
+}
+
 header('Content-Type: application/json');
 echo (json_encode($response_array));
 ?>
