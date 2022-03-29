@@ -18,8 +18,8 @@ if(isset($_POST['action']) && $_POST['FolderName'])
 		$res['folders'] = [];
 		$route_data = (array_slice((scandir($_POST['DirectoryPath'])),2));// if array slice isn't done here then it will show 2 more folder which is . and ..
 		foreach ($route_data as $element_name) {	
-			$ElementPath = $dir . '/' . $element_name;
-			if (is_file($ElementPath)) {
+			$ElementPath = $_POST['DirectoryPath'] . '/' . $element_name;
+			if (is_file($ElementPath) && !is_dir($ElementPath)) {
 				$temp['path'] = $ElementPath;
 				$temp['name'] = $element_name;
 				$temp['type'] = pathinfo($element_name, PATHINFO_EXTENSION);
